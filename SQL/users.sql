@@ -1,0 +1,97 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- ホスト: mysql657.db.sakura.ne.jp
+-- 生成日時: 2024 年 7 月 18 日 10:19
+-- サーバのバージョン： 5.7.40-log
+-- PHP のバージョン: 8.2.16
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- データベース: `gs1_kadai_php01`
+--
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `hashed_id` varchar(64) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `sex` int(11) NOT NULL,
+  `age` int(100) NOT NULL,
+  `timestamp` timestamp(6) NOT NULL,
+  `kanri_flg` int(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- テーブルのデータのダンプ `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `hashed_id`, `password`, `sex`, `age`, `timestamp`, `kanri_flg`) VALUES
+(64, 'mizukitest', '', '$2y$10$H/ChzVYB3C9p5AxRMCiNK.vP8HNCu47CyUZ/Hm.yfRJWN406ILGxy', 2, 30, '2024-07-17 07:09:44.000000', 0),
+(65, '武田', '', '$2y$10$5sBk1jCK289Ocd3qGAFTu.q/ZVRpVTTt4Qc/EixG2X4uIihRdO9vW', 1, 10, '2024-07-17 07:09:44.000000', 0),
+(69, '山田', '', '$2y$10$QAP6S4U1xXD9/Vm4wb3aeuKqnFHJqzIdEm56TF58yXD6WAn64DAVm', 1, 20, '2024-07-17 07:28:25.000000', 0),
+(70, '山田', 'ff5a1ae012afa5d4c889c50ad427aaf545d31a4fac04ffc1c4d03d403ba4250a', '$2y$10$ZptiT7aYD/Ft1UqfWsWL0OIsoFusVCAcUua4HksifIUEhgbzr8mtG', 1, 10, '2024-07-17 07:46:11.000000', 0),
+(74, '武田', 'eb624dbe56eb6620ae62080c10a273cab73ae8eca98ab17b731446a31c79393a', '$2y$10$OXr872rhEGrzFxfELt8Nf.FiYzIComThstHljs5a5ck522XUXUvwe', 1, 10, '2024-07-17 08:03:46.000000', 0),
+(75, '竹田', 'f369cb89fc627e668987007d121ed1eacdc01db9e28f8bb26f358b7d8c4f08ac', '$2y$10$.5mA.nBdD9np6hMLCUTTmOGoWQ0k82XcodGAo8MLGk8GlnhWIUFwK', 1, 10, '2024-07-17 08:04:04.000000', 0),
+(77, '竹田', 'a88a7902cb4ef697ba0b6759c50e8c10297ff58f942243de19b984841bfe1f73', '$2y$10$Q534BZu0s6/TYfWp27wA6.41dSe3aaLPDp.gv52PkH8Fd90vGpQ0u', 2, 10, '2024-07-17 08:09:14.000000', 0),
+(78, '竹田', '349c41201b62db851192665c504b350ff98c6b45fb62a8a2161f78b6534d8de9', '$2y$10$TO4KFQNxZlJjRHBqDQVxHOGvWXs5OBH1Hv4I6dwkgK/B0J.Lhqan.', 2, 10, '2024-07-17 08:09:20.000000', 0),
+(79, '竹田', '98a3ab7c340e8a033e7b37b6ef9428751581760af67bbab2b9e05d4964a8874a', '$2y$10$ubkRnJuy0/C8G.I15Z1k3uwOYsffDxPCtiilCE5eReJ5OE1UoPZ46', 2, 10, '2024-07-17 08:11:00.000000', 0),
+(80, '山田', '48449a14a4ff7d79bb7a1b6f3d488eba397c36ef25634c111b49baf362511afc', '$2y$10$Rj3O2Q9cDkpjdM4iqQGfR..j7NOahSeHQO4TpOsRATFfen2a9fTNG', 1, 10, '2024-07-17 08:12:09.000000', 0),
+(81, '1234', '5316ca1c5ddca8e6ceccfce58f3b8540e540ee22f6180fb89492904051b3d531', '$2y$10$6/3Xt9OngPBlmwBT5QvauO4fs9QUfOc3uLtH7Vvs1DhXb0xhIkQ/.', 1, 10, '2024-07-17 08:19:03.000000', 0),
+(82, '1234', 'a46e37632fa6ca51a13fe39a567b3c23b28c2f47d8af6be9bd63e030e214ba38', '$2y$10$0tNWQahhtVAr.xMBFPE9xepR6A7OpWPFKZIyqbgkp6RbNvOo4lf06', 1, 10, '2024-07-17 08:27:18.000000', 0),
+(90, '山田', '69f59c273b6e669ac32a6dd5e1b2cb63333d8b004f9696447aee2d422ce63763', '$2y$10$IRhdu092tBIgg4QvJfh8zOOBKw8fFeBwlrsI.08B7YIyTvxK.XdZi', 1, 10, '2024-07-17 08:52:00.000000', 0),
+(92, '大山', '8241649609f88ccd2a0a5b233a07a538ec313ff6adf695aa44a969dbca39f67d', '$2y$10$1abd0Pn9ZgGzlxvb2hx15.lRuLX6Ja78RNyPJMDD54FhBTozqJ8FC', 1, 10, '2024-07-17 09:38:00.000000', 0),
+(93, '武田', '6e4001871c0cf27c7634ef1dc478408f642410fd3a444e2a88e301f5c4a35a4d', '$2y$10$MCn5xUPraFHiZuOlFeKTDu8edM3852/IUnYBng1D0JJ1iuKODEFOW', 1, 10, '2024-07-17 09:55:00.000000', 0),
+(94, '武田', 'e3d6c4d4599e00882384ca981ee287ed961fa5f3828e2adb5e9ea890ab0d0525', '$2y$10$ws55la.uCPmVDc7v00ayqeoNSIQKm2pGW6yd9Wa5owi7HahHWiQMy', 1, 10, '2024-07-17 09:59:00.000000', 0),
+(95, '太田', 'ad48ff99415b2f007dc35b7eb553fd1eb35ebfa2f2f308acd9488eeb86f71fa8', '$2y$10$aKKZYRI5yJqVhfEatz.S1eHn339/r3.f33U2Nt6o3CGyhWweX8tli', 1, 10, '2024-07-17 10:08:00.000000', 0),
+(96, '1234', '7b1a278f5abe8e9da907fc9c29dfd432d60dc76e17b0fabab659d2a508bc65c4', '$2y$10$khRxj6eBvuoxIil50EqNWeNIUTsqVMbxngzalPvIgaDcNFUvRrlYK', 1, 40, '2024-07-17 10:24:00.000000', 0),
+(97, 'r', 'd6d824abba4afde81129c71dea75b8100e96338da5f416d2f69088f1960cb091', '$2y$10$B/X3JuiuaKxCetCvcAY38ut/CQsNRq.WbFotRmegVk7RjZNJ8TXHK', 1, 10, '2024-07-17 10:29:00.000000', 0),
+(98, '武田', '29db0c6782dbd5000559ef4d9e953e300e2b479eed26d887ef3f92b921c06a67', '$2y$10$Er1hsNnnXoI6spVXlQdkFeIdSBA7TqQNT9Njj5wmEBwVjkM3ELNAy', 1, 10, '2024-07-17 10:34:00.000000', 0),
+(99, '武田', '8c1f1046219ddd216a023f792356ddf127fce372a72ec9b4cdac989ee5b0b455', '$2y$10$QCHX/ZxPZQAa6IdpjXxZ7ON.xnkXDi98M7h65ENvD7IHOrE9x8gQy', 1, 10, '2024-07-18 01:07:43.000000', 1),
+(103, 'TO', '454f63ac30c8322997ef025edff6abd23e0dbe7b8a3d5126a894e4a168c1b59b', '$2y$10$BIDs1P/KIvbWwluDMpAHCevCUk43oCJj7VjiXymLsoo8eTf5UzaU.', 2, 50, '2024-07-18 01:07:43.000000', 1),
+(104, '竹田', '5ef6fdf32513aa7cd11f72beccf132b9224d33f271471fff402742887a171edf', '$2y$10$BvwtTitY7ZvT7TGy5.0vku2q8tgVx2vDWCVnD6tijeyIDrASNDhmW', 1, 10, '2024-07-17 18:31:00.000000', 0),
+(105, 'やまだ', '1253e9373e781b7500266caa55150e08e210bc8cd8cc70d89985e3600155e860', '$2y$10$Rz1w2.x6YfMBtDApmPIpmeCZiN5HOgFStQDM4c/x3jcAuUwk6e5IW', 1, 10, '2024-07-17 18:33:00.000000', 0),
+(106, '１２', '482d9673cfee5de391f97fde4d1c84f9f8d6f2cf0784fcffb958b4032de7236c', '$2y$10$MscrkdPjBYoriE0CBOl.ieRUy473D95vqjQyDDeeP2FIKaErkDY2O', 1, 10, '2024-07-17 19:13:00.000000', 0),
+(107, '武田', '3346f2bbf6c34bd2dbe28bd1bb657d0e9c37392a1d5ec9929e6a5df4763ddc2d', '$2y$10$Ex1KW.gL0gLmYJitL7tE9uSb9SmGAu5rQuWhEvnNUFY75aNwvEBKq', 1, 10, '2024-07-17 19:19:00.000000', 0),
+(108, '１２３', '9537f32ec7599e1ae953af6c9f929fe747ff9dadf79a9beff1f304c550173011', '$2y$10$X.xx.MXs30oa9xLB5.lIOuAzLcux.BzmPC6ABVjjPQVomrXNELMxu', 1, 10, '2024-07-17 19:31:00.000000', 0);
+
+--
+-- ダンプしたテーブルのインデックス
+--
+
+--
+-- テーブルのインデックス `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- ダンプしたテーブルの AUTO_INCREMENT
+--
+
+--
+-- テーブルの AUTO_INCREMENT `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
