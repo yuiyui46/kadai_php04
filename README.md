@@ -19,6 +19,7 @@ https://gs1.sakura.ne.jp/kadai_php01_fz/admin_user_data.php<br>
 -kanri_flg機能<br>
 -User ListとData Listのそれぞれの管理画面と両画面へのリンク機能<br>
 -両管理画面のリスト上での、編集、削除、選択したuserの一括削除機能<br>
+<br>
 <User画面>（前回URL）<br>
 -ログイン認証<br>
 -データ取得時に初回依頼者と2回目以降の依頼者の区別<br>
