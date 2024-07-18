@@ -2,7 +2,7 @@
 -ブックマークアプリ（Session・ログイン）　　
 
 # ②課題内容（どんな作品か）　　
--個人クライアント相談依頼用フォームのデータの各種リスト管理
+-個人クライアント相談依頼データの各種リスト管理
 
 # ③DEMO　　
 https://gs1.sakura.ne.jp/kadai_php01_fz/admin_user.php<br>
