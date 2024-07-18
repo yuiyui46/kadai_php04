@@ -5,6 +5,7 @@ $username_db = "gs1";  // ユーザー名
 $password_db = "--";  // パスワード
 $dbname = "gs1_kadai_php01";
 
+
 // データベース接続
 $conn = new mysqli($servername, $username_db, $password_db, $dbname);
 
@@ -40,8 +41,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+// 検索条件の設定
+$search_hashed_id = "";
+if (isset($_POST['search_hashed_id'])) {
+    $search_hashed_id = $_POST['search_hashed_id'];
+}
+
 // user_dataテーブルのデータを取得
 $sql = "SELECT id, username, hashed_id, request_type, request_content, timestamp FROM user_data";
+if (!empty($search_hashed_id)) {
+    $sql .= " WHERE hashed_id LIKE '%" . $conn->real_escape_string($search_hashed_id) . "%'";
+}
 $result = $conn->query($sql);
 ?>
 
@@ -53,18 +63,25 @@ $result = $conn->query($sql);
     <link rel="stylesheet" type="text/css" href="css/styles2.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Data List</h1>
-            <div class="subtitle">
-                <a href="admin_user.php" class="admin-data-link">User List</a>
-            </div>
-            <div class="link-container">
-                <a href="logout.php" class="logout-button">Log Out</a>
-            </div>
-        </div>
-    </header>
+<header>
     <div class="container">
+        <h1>Data List</h1>
+        <div class="subtitle">
+            <a href="admin_user.php" class="admin-data-link">User List</a>
+        </div>
+        <div class="link-container">
+            <a href="logout.php" class="logout-button">Log Out</a>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="search-container">
+        <form method="post" action="" class="search-form">
+            <input type="text" name="search_hashed_id" class="search-input" placeholder="Search by Hashed ID" value="<?php echo htmlspecialchars($search_hashed_id); ?>">
+            <button type="submit" class="search-button">Search</button>
+        </form>
+    </div>
+    <div class="data-container">
         <form method="post" action="">
             <div class="button-container">
                 <button type="submit" name="delete_selected" class="delete-selected-button" onclick="return confirm('Are you sure you want to delete selected entries?')">一括削除</button>
@@ -107,54 +124,55 @@ $result = $conn->query($sql);
             </table>
         </form>
     </div>
+</div>
 
-    <!-- 編集モーダル -->
-    <div id="edit-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <form method="post" action="">
-                <input type="hidden" name="id" id="edit-id">
-                <label for="edit-username">Username:</label>
-                <input type="text" name="username" id="edit-username" required>
-                <label for="edit-hashed_id">Hashed ID:</label>
-                <input type="text" name="hashed_id" id="edit-hashed_id" readonly>
-                <label for="edit-request_type">Request Type:</label>
-                <input type="text" name="request_type" id="edit-request_type" required>
-                <label for="edit-request_content">Request Content:</label>
-                <input type="text" name="request_content" id="edit-request_content" required>
-                <label for="edit-timestamp">Timestamp:</label>
-                <input type="text" name="timestamp" id="edit-timestamp" required>
-                <button type="submit" name="edit">更新</button>
-            </form>
-        </div>
+<!-- 編集モーダル -->
+<div id="edit-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form method="post" action="">
+            <input type="hidden" name="id" id="edit-id">
+            <label for="edit-username">Username:</label>
+            <input type="text" name="username" id="edit-username" required>
+            <label for="edit-hashed_id">Hashed ID:</label>
+            <input type="text" name="hashed_id" id="edit-hashed_id" readonly>
+            <label for="edit-request_type">Request Type:</label>
+            <input type="text" name="request_type" id="edit-request_type" required>
+            <label for="edit-request_content">Request Content:</label>
+            <input type="text" name="request_content" id="edit-request_content" required>
+            <label for="edit-timestamp">Timestamp:</label>
+            <input type="text" name="timestamp" id="edit-timestamp" required>
+            <button type="submit" name="edit">更新</button>
+        </form>
     </div>
+</div>
 
-    <script>
-        // モーダル表示用のスクリプト
-        var modal = document.getElementById('edit-modal');
-        var span = document.getElementsByClassName('close')[0];
+<script>
+    // モーダル表示用のスクリプト
+    var modal = document.getElementById('edit-modal');
+    var span = document.getElementsByClassName('close')[0];
 
-        document.querySelectorAll('.edit-button').forEach(button => {
-            button.onclick = function() {
-                modal.style.display = 'block';
-                document.getElementById('edit-id').value = this.getAttribute('data-id');
-                document.getElementById('edit-username').value = this.getAttribute('data-username');
-                document.getElementById('edit-hashed_id').value = this.getAttribute('data-hashed_id');
-                document.getElementById('edit-request_type').value = this.getAttribute('data-request_type');
-                document.getElementById('edit-request_content').value = this.getAttribute('data-request_content');
-                document.getElementById('edit-timestamp').value = this.getAttribute('data-timestamp');
-            };
-        });
+    document.querySelectorAll('.edit-button').forEach(button => {
+        button.onclick = function() {
+            modal.style.display = 'block';
+            document.getElementById('edit-id').value = this.getAttribute('data-id');
+            document.getElementById('edit-username').value = this.getAttribute('data-username');
+            document.getElementById('edit-hashed_id').value = this.getAttribute('data-hashed_id');
+            document.getElementById('edit-request_type').value = this.getAttribute('data-request_type');
+            document.getElementById('edit-request_content').value = this.getAttribute('data-request_content');
+            document.getElementById('edit-timestamp').value = this.getAttribute('data-timestamp');
+        };
+    });
 
-        span.onclick = function() {
+    span.onclick = function() {
+        modal.style.display = 'none';
+    };
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
             modal.style.display = 'none';
-        };
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        };
-    </script>
+        }
+    };
+</script>
 </body>
 </html>

@@ -12,7 +12,6 @@ $servername = "sakura.ne.jp";
 $username_db = "gs1";  // ユーザー名
 $password_db = "--";  // パスワード
 $dbname = "gs1_kadai_php01";
-
 $conn = new mysqli($servername, $username_db, $password_db, $dbname);
 
 if ($conn->connect_error) {
@@ -63,7 +62,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+$search_hashed_id = '';
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search_hashed_id'])) {
+    $search_hashed_id = trim($_GET['search_hashed_id']);
+}
+
 $sql = "SELECT id, username, hashed_id, sex, age, timestamp, kanri_flg FROM users";
+if (!empty($search_hashed_id)) {
+    $sql .= " WHERE hashed_id LIKE '%" . $conn->real_escape_string($search_hashed_id) . "%'";
+}
+
 $result = $conn->query($sql);
 
 if (!$result) {
@@ -91,6 +99,10 @@ if (!$result) {
         </div>
     </header>
     <div class="container">
+        <form method="get" action="">
+            <input type="text" name="search_hashed_id" placeholder="Search by Hashed ID" value="<?php echo htmlspecialchars($search_hashed_id); ?>">
+            <button type="submit">Search</button>
+        </form>
         <form method="post" action="">
             <div class="button-container">
                 <button type="submit" name="delete_selected" class="delete-selected-button" onclick="return confirm('Are you sure you want to delete selected users?')">一括削除</button>
@@ -129,7 +141,6 @@ if (!$result) {
                     } else {
                         echo "<tr><td colspan='8'>No users found</td></tr>";
                     }
-                    $conn->close();
                     ?>
                 </tbody>
             </table>
@@ -184,3 +195,4 @@ if (!$result) {
     </script>
 </body>
 </html>
+
