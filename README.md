@@ -16,6 +16,7 @@ https://gs1.sakura.ne.jp/kadai_php01_fz/admin_user_data.php<br>
 <管理者画面><br>
 -パスワードのハッシュ化<br>
 -IDのハッシュ化（PWはハッシュ化しても一覧表示のリスク大とのことだったため、今後、複数スタッフでの個人情報管理を見据えて匿名化共有IDとしてハッシュID発行機能を付けた）<br>
+-ハッシュIDでクライアント情報を検索<br>
 -kanri_flg機能<br>
 -User ListとData Listのそれぞれの管理画面と両画面へのリンク機能<br>
 -両管理画面のリスト上での、編集、削除、選択したuserの一括削除機能<br>
